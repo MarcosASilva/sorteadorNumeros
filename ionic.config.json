@@ -1,0 +1,7 @@
+{
+  "name": "sorteadorNumeros",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
