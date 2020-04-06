@@ -13,5 +13,75 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  
+    <ion-card>
+      <ion-card-header>
+        
+        <ion-card-title>Opções</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="option-inputs-1" *ngIf="modo === 'simples'"> 
+          <ion-item  >
+            <ion-label class="label-option-inputs-1" position="floating" >Numero Inicial</ion-label>
+           
+          <ion-input type="number" [(ngModel)]="numInicial" ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-option-inputs-1" position="floating" >Numero Final</ion-label>
+
+          <ion-input type="number" [(ngModel)]="numFinal" ></ion-input>
+          </ion-item>
+        </div>
+        <div class="option-inputs-1" *ngIf="modo === 'mega' || modo==='quina'"> 
+          <ion-item  >
+            <ion-label class="label-option-inputs-1" position="floating" >Numero Inicial  </ion-label>
+           
+          <ion-input type="number" [(ngModel)]="numInicialLoteria" disabled></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-option-inputs-1" position="floating">Numero Final</ion-label>
+
+      <ion-input type="number" [(ngModel)]="numFinalLoteria"  disabled ></ion-input>
+          </ion-item>
+        </div>
+        
+        <ion-item>
+          <ion-label>Modo de Sorteio</ion-label>
+          <ion-select value="simples" interface="action-sheet" placeholder="Selecione um modo" [(ngModel)]='modo'>
+            <ion-select-option value="simples">Sorteio Simples</ion-select-option>
+            <ion-select-option value="mega">Loteria - Mega Sena</ion-select-option>
+            <ion-select-option value="quina">Loteria - Quina</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-button  expand="block" fill="clear" class="circle-button" (click)="sortear()" >
+      Sortear
+    </ion-button>
+
+
+    <div *ngIf="sorteado" class="numSorteado">
+      <div *ngIf="modo === 'simples'">
+        <ion-chip color="primary" mode="ios" outline="true">
+          <ion-label>
+            {{numSorteado}}
+          </ion-label>
+        </ion-chip>
+      </div>
+      <div *ngIf="modo === 'mega' || modo==='quina'">
+        
+
+        <div >
+          <ion-chip color="primary" mode="ios" outline="true" *ngFor="let item of numLoteria" >
+            <ion-label>
+              {{item}}
+            </ion-label>
+          </ion-chip>
+        </div>
+
+      </div>
+    </div>
+  
 </ion-content>
