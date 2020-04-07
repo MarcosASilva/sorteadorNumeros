@@ -11,9 +11,14 @@ export class Tab1Page {
   numFinal = 1;
   numFinalLoteria = 60;
   sorteado = false;
-  numSorteado = 0
+  numSorteado = []
   modo = 'simples'
   numLoteria = []
+  qtdNumeros = 1
+  valido = true
+  message = ''
+
+
   constructor() {}
 
 
@@ -21,12 +26,24 @@ export class Tab1Page {
     if(this.modo==='mega'||this.modo==='quina'){
       return this.sortearLoteria();
     }
-
+    this.numSorteado = []
     let min = Math.ceil(this.numInicial);
     
-    let max = Math.floor(this.numFinal);
-   
-    this.numSorteado =  Math.floor(Math.random() * (max - min)) + min;
+    let max = Math.floor(this.numFinal + 1);
+    
+   // let num;
+   // num =  Math.floor(Math.random() * (max - min)) + min;
+
+    for (let i = 0; i < this.qtdNumeros; i++) {
+
+      let num = Math.floor(Math.random() * (max - min)) + min;
+   /*   while (this.numSorteado.includes(num)) {
+        num = Math.floor(Math.random() * (max - min)) + min;
+      }*/
+      this.numSorteado.push(num)
+    }
+
+   // this.numSorteado.push(num)
     this.sorteado = true
     
   }
@@ -36,7 +53,7 @@ export class Tab1Page {
     let max = Math.floor(this.numFinalLoteria + 1);
     let x = 0
     if(this.modo==='mega'){
-       x = 60
+       x = 6
     }else{
        x = 5
     }
@@ -53,8 +70,25 @@ export class Tab1Page {
     this.numLoteria.sort((a,b) => {
       return a - b;
     })
-    console.log(this.numLoteria);
+   // console.log(this.numLoteria);
     
+
+  }
+
+  changeInputFinal = () => {
+    
+    if(this.numFinal<this.numInicial){
+      this.valido = false
+      this.message = '*O Valor Inicial não pode ser maior que o valor final'
+    }
+      
+    else
+      this.valido = true
+    
+  }
+  changeInputInicial = () => {
+    if (this.numFinal < this.numInicial)
+      this.valido = false
     
   }
 }
