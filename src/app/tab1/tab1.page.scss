@@ -15,5 +15,30 @@ ion-select-option {
 
 .numSorteado {
   text-align: center;
-  font-size: 16px;
+}
+.conteudo{
+  background-color: #4cadca !important;
+  color: white;
+  height:  auto;
+}
+ion-chip {
+  background-color: white;
+  color: #000;
+
+  font-size: 25px !important;
+}
+.circle-button {
+  margin-bottom: 25px !important  ;
+  font-size: 30px;
+  width: 50%;
+  margin: 0 auto;
+  width: 153px;
+  height: 153px;
+  color: white;
+  background-color: rgb(116, 160, 255);
+  border-radius: 50%;
+}
+.limpa {
+  display: flex;
+  align-items: flex-start;
 }

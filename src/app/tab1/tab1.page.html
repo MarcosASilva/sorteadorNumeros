@@ -1,18 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Sorteador de Numeros
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
+
+  
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Sorteador de Numeros
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title>Sorteador de Numeros</ion-title>
     </ion-toolbar>
   </ion-header>
-
+ 
 
   <ion-card>
     <ion-card-header>
@@ -40,6 +42,11 @@
       <ion-item>
         <ion-label>Quantidade de numeros</ion-label>
         <ion-input type="number" [(ngModel)]='qtdNumeros'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Repetir Números?</ion-label>
+        <ion-toggle [(ngModel)]="repeat"></ion-toggle>
       </ion-item>
       </div>
 
@@ -75,23 +82,15 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-
-  <div *ngIf="valido"> 
-      <ion-button expand="block" fill="clear" class="circle-button" (click)="sortear()">
-        Sortear
+  <div *ngIf="sorteado" class="numSorteado">
+    <div class="limpa">
+      <ion-button expand="block" fill="clear" class="limpa" (click)="limpar()">
+        Limpar
       </ion-button>
-  </div>
-
-    <div *ngIf="!valido">
-      <ion-text color="danger"> {{message}} </ion-text>
-      <ion-button expand="block"  fill="clear" class="circle-button" disabled>
-        Sortear
+      <ion-button expand="block" fill="clear"  (click)="sortear()">
+        Sortear outra vez
       </ion-button>
     </div>
-
-
-
-  <div *ngIf="sorteado" class="numSorteado">
     <div *ngIf="modo === 'simples'">
         <ion-chip color="primary" mode="ios" outline="true" *ngFor="let item of numSorteado">
           <ion-label>
@@ -112,5 +111,24 @@
 
     </div>
   </div>
+  <div *ngIf="valido&&!sorteado"> 
+      <ion-button expand="block" fill="clear" class="circle-button" (click)="sortear()">
+        Sortear
+      </ion-button>
+  </div>
+  
+    <div *ngIf="!valido" >
+      <ion-text color="danger"> {{message}} </ion-text>
+      <ion-button expand="block"  fill="clear" class="circle-button" disabled>
+        Sortear
+      </ion-button>
+    </div>
+
+
+    <div *ngIf="carregando" class="numSorteado">
+      <h1>Sorteando...</h1>
+    </div>
+
+  
 
 </ion-content>

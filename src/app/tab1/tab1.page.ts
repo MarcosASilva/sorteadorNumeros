@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -17,12 +18,13 @@ export class Tab1Page {
   qtdNumeros = 1
   valido = true
   message = ''
+  carregando = false
+  repeat = true
+
+  constructor(public loadingController: LoadingController) {}
 
 
-  constructor() {}
-
-
-  sortear = () => {
+  async  sortear (){
     if(this.modo==='mega'||this.modo==='quina'){
       return this.sortearLoteria();
     }
@@ -33,7 +35,13 @@ export class Tab1Page {
     
    // let num;
    // num =  Math.floor(Math.random() * (max - min)) + min;
-
+  
+   //this.sorteado= false
+   const loading = await this.loadingController.create({
+    message: 'Sorteando...',
+    duration: 2000
+  });
+  await loading.present();
     for (let i = 0; i < this.qtdNumeros; i++) {
 
       let num = Math.floor(Math.random() * (max - min)) + min;
@@ -42,13 +50,15 @@ export class Tab1Page {
       }*/
       this.numSorteado.push(num)
     }
-
+ loading.dismiss()
    // this.numSorteado.push(num)
     this.sorteado = true
+    console.log(this.numSorteado);
+    
     
   }
   sortearLoteria = () => {
-    this.numLoteria = []
+    this.numLoteria = this.numSorteado =[]
     let min = Math.ceil(this.numInicialLoteria );
     let max = Math.floor(this.numFinalLoteria + 1);
     let x = 0
@@ -61,15 +71,16 @@ export class Tab1Page {
     for(let i=0;i< x;i++){
 
       let num =  Math.floor(Math.random() * (max - min)) + min;
-      while(this.numLoteria.includes(num)){
+      while(this.numSorteado.includes(num)){
         num =  Math.floor(Math.random() * (max - min)) + min;
       }
-      this.numLoteria.push(num)
+      this.numSorteado.push(num)
     }
     this.sorteado = true
     this.numLoteria.sort((a,b) => {
       return a - b;
     })
+    this.numLoteria = this.numSorteado
    // console.log(this.numLoteria);
     
 
@@ -86,9 +97,8 @@ export class Tab1Page {
       this.valido = true
     
   }
-  changeInputInicial = () => {
-    if (this.numFinal < this.numInicial)
-      this.valido = false
-    
+  limpar(){
+    this.sorteado = false
+    this.numSorteado = this.numLoteria = []
   }
 }
