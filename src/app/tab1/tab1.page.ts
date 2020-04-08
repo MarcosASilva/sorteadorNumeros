@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -21,7 +22,7 @@ export class Tab1Page {
   carregando = false
   repeat = true
 
-  constructor(public loadingController: LoadingController) {}
+  constructor(public loadingController: LoadingController,private storage: Storage) {}
 
 
   async  sortear (){
@@ -74,7 +75,10 @@ export class Tab1Page {
       while(this.numSorteado.includes(num)){
         num =  Math.floor(Math.random() * (max - min)) + min;
       }
+      
       this.numSorteado.push(num)
+      let key = new Date().toUTCString();
+      this.storage.set(key, this.numSorteado);
     }
     this.sorteado = true
     this.numLoteria.sort((a,b) => {
