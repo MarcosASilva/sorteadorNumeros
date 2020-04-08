@@ -92,10 +92,13 @@ export class Tab1Page {
       this.valido = false
       this.message = '*O Valor Inicial não pode ser maior que o valor final'
     }
-      
-    else
+      else if(this.qtdNumeros > (1 + this.numFinal - this.numInicial   )){
+      this.valido = false
+      this.message = '*O Valor Inicial não pode ser maior que o valor final'
+      }
+    else{
       this.valido = true
-    
+    }
   }
   limpar(){
     this.sorteado = false

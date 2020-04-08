@@ -82,12 +82,25 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+    <div *ngIf="valido&&!sorteado"> 
+      <ion-button expand="block" fill="clear" class="circle-button" (click)="sortear()">
+        Sortear
+      </ion-button>
+  </div>
+  
+    <div *ngIf="!valido" >
+      <ion-text color="danger"> {{message}} </ion-text>
+      <ion-button expand="block" *ngIf="!sorteado" fill="clear" class="circle-button" disabled>
+        Sortear
+      </ion-button>
+    </div>
+
   <div *ngIf="sorteado" class="numSorteado">
     <div class="limpa">
       <ion-button expand="block" fill="clear" class="limpa" (click)="limpar()">
         Limpar
       </ion-button>
-      <ion-button expand="block" fill="clear"  (click)="sortear()">
+      <ion-button expand="block" fill="clear"  *ngIf="valido" (click)="sortear()">
         Sortear outra vez
       </ion-button>
     </div>
@@ -111,18 +124,6 @@
 
     </div>
   </div>
-  <div *ngIf="valido&&!sorteado"> 
-      <ion-button expand="block" fill="clear" class="circle-button" (click)="sortear()">
-        Sortear
-      </ion-button>
-  </div>
-  
-    <div *ngIf="!valido" >
-      <ion-text color="danger"> {{message}} </ion-text>
-      <ion-button expand="block"  fill="clear" class="circle-button" disabled>
-        Sortear
-      </ion-button>
-    </div>
 
 
     <div *ngIf="carregando" class="numSorteado">
