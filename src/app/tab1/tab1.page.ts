@@ -64,6 +64,7 @@ export class Tab1Page {
     let max = Math.floor(this.numFinalLoteria + 1);
     let x = 0
     if(this.modo==='mega'){
+      
        x = 6
     }else{
        x = 5
