@@ -11,6 +11,7 @@ import { LoadingController } from '@ionic/angular';
 
 export class Tab2Page {
   numeros: Numeros[] = []
+  show: false
   constructor(public loadingController: LoadingController,private storage: Storage) {
       this.loading()
       storage.forEach((value,key,iterationNumber) => {
@@ -25,13 +26,29 @@ export class Tab2Page {
   }
   async loading(){
     const loading = await this.loadingController.create({
-      message: 'Sorteando...',
+      message: 'Carregando',
       duration: 2000
     });
     await loading.present()
     
   }
+  doRefresh(event){
+    this.numeros = []
+    this.storage.forEach((value,key,iterationNumber) => {
+      let num = new Numeros()
+      num.key = key
+      num.numeros = value
+      console.log(num);
+      
+      this.numeros.push(num)
+      
+    }).then(( ) => {
+      event.target.complete();
+    })
 
+
+    
+  }
 }
 export class Numeros{
   numeros = []
