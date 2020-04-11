@@ -103,6 +103,9 @@
       <ion-button expand="block" fill="clear"  *ngIf="valido" (click)="sortear()">
         Sortear outra vez
       </ion-button>
+            <ion-button expand="block" fill="clear" *ngIf="valido" (click)="salvar()">
+              Salvar o sorteio?
+            </ion-button>
     </div>
     <div *ngIf="modo === 'simples'">
         <ion-chip color="primary" mode="ios" outline="true" *ngFor="let item of numSorteado">

@@ -1,3 +1,4 @@
+import { DatabaseService } from './../database.service';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
@@ -12,17 +13,12 @@ import { LoadingController } from '@ionic/angular';
 export class Tab2Page {
   numeros: Numeros[] = []
   show: false
-  constructor(public loadingController: LoadingController,private storage: Storage) {
+  
+  constructor(public loadingController: LoadingController, public db: DatabaseService) {
       this.loading()
-      storage.forEach((value,key,iterationNumber) => {
-        let num = new Numeros()
-        num.key = key
-        num.numeros = value
-        console.log(num);
-        
-        this.numeros.push(num)
-        
-      })
+    this.db.getAll().then((num) => {
+      this.numeros = num
+    })
   }
   async loading(){
     const loading = await this.loadingController.create({
@@ -34,15 +30,8 @@ export class Tab2Page {
   }
   doRefresh(event){
     this.numeros = []
-    this.storage.forEach((value,key,iterationNumber) => {
-      let num = new Numeros()
-      num.key = key
-      num.numeros = value
-      console.log(num);
-      
-      this.numeros.push(num)
-      
-    }).then(( ) => {
+    this.db.getAll().then((num) => {
+      this.numeros = num
       event.target.complete();
     })
 
@@ -50,7 +39,7 @@ export class Tab2Page {
     
   }
 }
-export class Numeros{
+export class Numeros {
   numeros = []
   key
 
