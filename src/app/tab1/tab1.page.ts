@@ -66,7 +66,7 @@ export class Tab1Page {
 
 
   }
-  sortearLoteria = () => {
+  async sortearLoteria(){
     this.numLoteria = this.numSorteado = []
     let min = Math.ceil(this.numInicialLoteria);
     let max = Math.floor(this.numFinalLoteria + 1);
@@ -77,7 +77,11 @@ export class Tab1Page {
     } else {
       x = 5
     }
-
+    const loading = await this.loadingController.create({
+      message: 'Sorteando...',
+      duration: 2000
+    });
+    await loading.present();
     for (let i = 0; i < x; i++) {
 
       let num = Math.floor(Math.random() * (max - min)) + min;
@@ -93,7 +97,9 @@ export class Tab1Page {
     this.numLoteria.sort((a, b) => {
       return a - b;
     })
+    
     this.numLoteria = this.numSorteado
+    loading.dismiss()
     // console.log(this.numLoteria);
     
 

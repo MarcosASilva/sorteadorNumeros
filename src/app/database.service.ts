@@ -9,13 +9,15 @@ export class DatabaseService {
   constructor(private storage: Storage) { }
 
   insert(numSorteados){
-    let key = new Date().toUTCString();
+    //let key = new Date().toUTCString();
+    let key = this.makeid(7)
     this.storage.set(key, numSorteados);
   }
 
   getAll(){
     let numeros: Numeros[] = []
     return this.storage.forEach((value, key, iterationNumber) => {
+      console.log(key);
       
       let num = new Numeros()
       num.key = key
@@ -28,6 +30,15 @@ export class DatabaseService {
     })
     
   }
+  makeid(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_@';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 }
 export class Numeros {
   numeros = []

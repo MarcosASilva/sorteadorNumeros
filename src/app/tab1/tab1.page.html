@@ -1,7 +1,6 @@
-
 <ion-content [fullscreen]="true">
 
-  
+
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-title>
@@ -14,7 +13,7 @@
       <ion-title>Sorteador de Numeros</ion-title>
     </ion-toolbar>
   </ion-header>
- 
+
 
   <ion-card>
     <ion-card-header>
@@ -27,27 +26,28 @@
       <!--      Modo Simples      -->
 
       <div *ngIf="modo === 'simples'">
-      <div class="option-inputs-1">
-        <ion-item>
-          <ion-label class="label-option-inputs-1" position="floating">Numero Inicial</ion-label>
-      
-          <ion-input type="number" [(ngModel)]="numInicial" (change)="changeInputFinal()"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label class="label-option-inputs-1" position="floating">Numero Final</ion-label>
-      
-          <ion-input type="number" [(ngModel)]="numFinal" (change)="changeInputFinal()" min={{numInicial}}></ion-input>
-        </ion-item>
-      </div>
-      <ion-item>
-        <ion-label>Quantidade de numeros</ion-label>
-        <ion-input type="number" [(ngModel)]='qtdNumeros'></ion-input>
-      </ion-item>
+        <div class="option-inputs-1">
+          <ion-item>
+            <ion-label class="label-option-inputs-1" position="floating">Numero Inicial</ion-label>
 
-      <ion-item>
-        <ion-label>Repetir Números?</ion-label>
-        <ion-toggle [(ngModel)]="repeat"></ion-toggle>
-      </ion-item>
+            <ion-input type="number" [(ngModel)]="numInicial" (change)="changeInputFinal()"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-option-inputs-1" position="floating">Numero Final</ion-label>
+
+            <ion-input type="number" [(ngModel)]="numFinal" (change)="changeInputFinal()" min={{numInicial}}>
+            </ion-input>
+          </ion-item>
+        </div>
+        <ion-item>
+          <ion-label>Quantidade de numeros</ion-label>
+          <ion-input type="number" [(ngModel)]='qtdNumeros'></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Repetir Números?</ion-label>
+          <ion-toggle [(ngModel)]="repeat"></ion-toggle>
+        </ion-item>
       </div>
 
 
@@ -74,45 +74,46 @@
 
       <ion-item>
         <ion-label>Modo de Sorteio</ion-label>
-        <ion-select value="simples"  placeholder="Selecione um modo" [(ngModel)]='modo'>
+        <ion-select value="simples" placeholder="Selecione um modo" [(ngModel)]='modo'>
           <ion-select-option value="simples"> Simples</ion-select-option>
-          <ion-select-option value="mega">Mega Sena   - Loteria</ion-select-option>
-          <ion-select-option value="quina">Quina   - Loteria</ion-select-option>
+          <ion-select-option value="mega">Mega Sena - Loteria</ion-select-option>
+          <ion-select-option value="quina">Quina - Loteria</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card-content>
   </ion-card>
-    <div *ngIf="valido&&!sorteado"> 
-      <ion-button expand="block" fill="clear" class="circle-button" (click)="sortear()">
-        Sortear
-      </ion-button>
+  <div *ngIf="valido&&!sorteado">
+    <ion-button expand="block" fill="clear" class="circle-button" (click)="sortear()">
+      Sortear
+    </ion-button>
   </div>
-  
-    <div *ngIf="!valido" >
-      <ion-text color="danger"> {{message}} </ion-text>
-      <ion-button expand="block" *ngIf="!sorteado" fill="clear" class="circle-button" disabled>
-        Sortear
-      </ion-button>
-    </div>
+
+  <div *ngIf="!valido">
+    <ion-text color="danger"> {{message}} </ion-text>
+    <ion-button expand="block" *ngIf="!sorteado" fill="clear" class="circle-button" disabled>
+      Sortear
+    </ion-button>
+  </div>
 
   <div *ngIf="sorteado" class="numSorteado">
     <div class="limpa">
       <ion-button expand="block" fill="clear" class="limpa" (click)="limpar()">
         Limpar
       </ion-button>
-      <ion-button expand="block" fill="clear"  *ngIf="valido" (click)="sortear()">
+      <ion-button expand="block" fill="clear" *ngIf="valido" (click)="sortear()">
         Sortear outra vez
       </ion-button>
-            <ion-button expand="block" fill="clear" *ngIf="valido" (click)="salvar()">
-              Salvar o sorteio?
-            </ion-button>
+      
+      <ion-button expand="block" fill="clear" *ngIf="valido" (click)="salvar()">
+        Salvar o sorteio?
+      </ion-button>
     </div>
     <div *ngIf="modo === 'simples'">
-        <ion-chip color="primary" mode="ios" outline="true" *ngFor="let item of numSorteado">
-          <ion-label>
-            {{item}}
-          </ion-label>
-        </ion-chip>
+      <ion-chip color="primary" mode="ios" outline="true" *ngFor="let item of numSorteado">
+        <ion-label>
+          {{item}}
+        </ion-label>
+      </ion-chip>
     </div>
     <div *ngIf="modo === 'mega' || modo==='quina'">
 
@@ -129,10 +130,7 @@
   </div>
 
 
-    <div *ngIf="carregando" class="numSorteado">
-      <h1>Sorteando...</h1>
-    </div>
 
-  
+
 
 </ion-content>
